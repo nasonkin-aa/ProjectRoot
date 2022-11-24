@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RoomDirection : MonoBehaviour
 {
+    public DirectionController DirectionController;
 
     public CardinalDirections direction;
     public enum CardinalDirections
@@ -13,38 +14,27 @@ public class RoomDirection : MonoBehaviour
         south = 3,
         west = 4
     }
-
-    public int CurentDirection
-    {
-        get { return _curentDirectiont; }
-        set
-        {
-            if (value == 5)
-                _curentDirectiont = 1;
-            else if (value == 0)
-                _curentDirectiont = 4;
-            else
-                _curentDirectiont = value;
-        }
-    }
-
-    private int _curentDirectiont = 1;
     public void Start()
     {
-        if ((int)direction == _curentDirectiont)
+        DirectionController = GameObject.Find("DirectionController").GetComponent<DirectionController>();
+    }
+    private void Update()
+    {
+        if ((int)direction == DirectionController.CurentDirection)
         {
-            foreach (Transform g in transform.GetComponentsInChildren<Transform>())
-            {
-                if (g.name != transform.name)
-                {
-                    g.gameObject.SetActive(false);
-                }
-            }
+            FindAllChildren(true);
+        }
+        else if ((int)direction != DirectionController.CurentDirection)
+        {
+            FindAllChildren(false);
         }
     }
-    public void Update()
+    public void FindAllChildren(bool value)
     {
-    
+        for (int i = 0; i < transform.childCount; i++)
+        {
+           transform.GetChild(i).gameObject.SetActive(value); ;
+        }
     }
 
 }

@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class ButtonHandler : MonoBehaviour
 {
-    private RoomDirection roomDirection;
+    private DirectionController direction;
 
- /*   void Start()
+    void Start()
     {
-        currentDisplay = GameObject.Find("displayImage").GetComponent<DisplayImage>();
+        direction = GameObject.Find("DirectionController").GetComponent<DirectionController>();
     }
-*/
- /*   public void OnRightClickArrow()
+
+    public void OnRightClickArrow()
     {
-        roomDirection;
+        direction.CurentDirection += 1;
+       // direction.
     }
 
     public void OnLeftClickArrow()
     {
-        currentDisplay.CurentWallHorizontal = currentDisplay.CurentWallHorizontal - 1;
-    }*/
+        direction.CurentDirection -= 1;
+    }
 
 }
