@@ -8,7 +8,6 @@ public class ItemUse : MonoBehaviour, IInteractable
     public string UnlockItem;
 
     private GameObject inventory;
-    public GameObject endScene;
     public GameObject key_yellow;
     // Start is called before the first frame update
     void Start()

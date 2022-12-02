@@ -16,13 +16,6 @@ public class Inventory : MonoBehaviour
     {
         InitializeInventory();
     }
-
-    void Update()
-    {
-        //SelectSlot();
-        //HideDisplay();
-    }
-
     void InitializeInventory()
     {
         slots = GameObject.Find("Slots");
@@ -50,7 +43,16 @@ public class Inventory : MonoBehaviour
             }
             else if (slot.gameObject == currentSelectedSlot && slot.GetComponent<Slot>().ItemProperty == Slot.property.displayable)
             {
-                slot.GetComponent<Slot>().DisplayItem();
+                if(!itemDisplayer.activeSelf)
+                {
+                    slot.GetComponent<Image>().color = new Color(.10f, .10f, .10f, 1);
+                    slot.GetComponent<Slot>().DisplayItem();
+                }
+                else
+                {
+                    slot.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+                    slot.GetComponent<Slot>().DisplayItem();
+                }
             }
             else
             {
@@ -58,19 +60,5 @@ public class Inventory : MonoBehaviour
             }
         }
     }
-
-    void HideDisplay()
-    {
-        if (Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
-        {
-            itemDisplayer.SetActive(false);
-            if (currentSelectedSlot.GetComponent<Slot>().ItemProperty == Slot.property.displayable)
-            {
-                currentSelectedSlot = previousSelectedSlot;
-                previousSelectedSlot = currentSelectedSlot;
-            }
-        }
-    }
-
 }
 

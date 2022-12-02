@@ -28,7 +28,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler
                 inventory.GetComponent<Inventory>().currentSelectedSlot;
             inventory.GetComponent<Inventory>().currentSelectedSlot = this.gameObject;
             Combine();
-            if (ItemProperty == Slot.property.displayable) DisplayItem();
+            //if (ItemProperty == Slot.property.displayable) DisplayItem();
             inventory.GetComponent<Inventory>().SelectSlot();
         }
     }
@@ -42,9 +42,17 @@ public class Slot : MonoBehaviour, IPointerClickHandler
 
     public void DisplayItem()
     {
-        inventory.GetComponent<Inventory>().itemDisplayer.SetActive(true);
-        inventory.GetComponent<Inventory>().itemDisplayer.GetComponent<Image>().sprite =
-            Resources.Load<Sprite>("Inventory Items/" + displayImage);
+        if (!inventory.GetComponent<Inventory>().itemDisplayer.activeSelf)
+        {
+            inventory.GetComponent<Inventory>().itemDisplayer.SetActive(true);
+            inventory.GetComponent<Inventory>().itemDisplayer.GetComponent<Image>().sprite =
+                Resources.Load<Sprite>("Inventory Items/" + displayImage);
+        }
+        else
+        {
+            inventory.GetComponent<Inventory>().itemDisplayer.SetActive(false);
+        }
+        
     }
 
     void Combine()
