@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     private Queue<string> sentences;
+    private Queue<string> names;
 
     public GameObject dialogbox;
     public Text nameText;
@@ -14,14 +15,18 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         sentences = new Queue<string>();
+        names = new Queue<string>();
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
         dialogbox.SetActive(true);
-        Debug.Log("stcw" + dialogue.name);
-        nameText.text = dialogue.name;
         sentences.Clear();
+        names.Clear();
+        foreach (string name in dialogue.names)
+        {
+            names.Enqueue(name);
+        }
 
         foreach (string sentence in dialogue.sentences)
         {
@@ -38,14 +43,15 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
+        string name = names.Dequeue();
         string sentence = sentences.Dequeue();
+        nameText.text = name;
         dialogueText.text = sentence;
-        Debug.Log(sentence);
+        
     }
     void EndDialogue()
     {
         dialogbox.SetActive(false);
-        Debug.Log("End of ");
     }
 
 
