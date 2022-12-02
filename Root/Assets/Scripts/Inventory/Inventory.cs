@@ -37,6 +37,7 @@ public class Inventory : MonoBehaviour
         }
         currentSelectedSlot = GameObject.Find("slot");
         previousSelectedSlot = currentSelectedSlot;
+        currentSelectedSlot = null;
     }
 
     public void SelectSlot()

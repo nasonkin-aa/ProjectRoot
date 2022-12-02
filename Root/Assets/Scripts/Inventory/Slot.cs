@@ -22,11 +22,15 @@ public class Slot : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        inventory.GetComponent<Inventory>().previousSelectedSlot = inventory.GetComponent<Inventory>().currentSelectedSlot;
-        inventory.GetComponent<Inventory>().currentSelectedSlot = this.gameObject;
-        Combine();
-        if (ItemProperty == Slot.property.displayable) DisplayItem();
-        inventory.GetComponent<Inventory>().SelectSlot();
+        if (gameObject.transform.GetChild(0).GetComponent<Image>().sprite.name != "empty_item")
+        {
+            inventory.GetComponent<Inventory>().previousSelectedSlot =
+                inventory.GetComponent<Inventory>().currentSelectedSlot;
+            inventory.GetComponent<Inventory>().currentSelectedSlot = this.gameObject;
+            Combine();
+            if (ItemProperty == Slot.property.displayable) DisplayItem();
+            inventory.GetComponent<Inventory>().SelectSlot();
+        }
     }
 
     public void AssignProperty(int orderNumber, string displayImage, string combinationItem)
@@ -45,7 +49,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler
 
     void Combine()
     {
-        if (inventory.GetComponent<Inventory>().previousSelectedSlot.GetComponent<Slot>().combinationItem
+        if (inventory.GetComponent<Inventory>().previousSelectedSlot != null && inventory.GetComponent<Inventory>().previousSelectedSlot.GetComponent<Slot>().combinationItem
             == this.gameObject.GetComponent<Slot>().combinationItem && this.gameObject.GetComponent<Slot>().combinationItem != "")
         {
             Debug.Log("combine");
@@ -65,5 +69,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler
         transform.GetChild(0).GetComponent<Image>().sprite =
             Resources.Load<Sprite>("Inventory Items/empty_item");
         inventory.GetComponent<Inventory>().SelectSlot();
+        inventory.GetComponent<Inventory>().currentSelectedSlot = null;
+        inventory.GetComponent<Inventory>().previousSelectedSlot = null;
     }
 }

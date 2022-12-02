@@ -16,22 +16,14 @@ public class ItemUse : MonoBehaviour, IInteractable
         inventory = GameObject.Find("Inventory");
     }
 
-    public void end()
-    {
-        endScene.SetActive(true);
-    }
-
     public void Interact(DisplayImage currentDisplay)
     {
-        if (inventory.GetComponent<Inventory>().currentSelectedSlot.gameObject.transform.GetChild(0).GetComponent<Image>().sprite.name == UnlockItem)
+        if (inventory.GetComponent<Inventory>().currentSelectedSlot != null && inventory.GetComponent<Inventory>().currentSelectedSlot.gameObject.transform.GetChild(0)
+                .GetComponent<Image>().sprite.name == UnlockItem)
         {
             inventory.GetComponent<Inventory>().currentSelectedSlot.gameObject.GetComponent<Slot>().ClearSlot();
             Destroy(gameObject);
             Debug.Log("Use " + UnlockItem);
-            if (UnlockItem == "key_yellow")
-            {
-                end();
-            }
             if (UnlockItem == "key_green")
             {
                 key_yellow.SetActive(true);
