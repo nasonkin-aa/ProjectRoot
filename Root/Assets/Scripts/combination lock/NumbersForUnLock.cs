@@ -13,7 +13,6 @@ public class NumbersForUnLock : PasswordManager
         {
             if (value == 5)
                 _numberInCell = 0;
-            
             else
                 _numberInCell = value;
         }

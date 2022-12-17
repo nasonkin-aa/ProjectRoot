@@ -23,15 +23,7 @@ public class DialogueManager : MonoBehaviour
         dialogbox.SetActive(true);
         sentences.Clear();
         names.Clear();
-        /*  foreach (string name in dialogue.names)
-          {
-              names.Enqueue(name);
-          }
-
-          foreach (string sentence in dialogue.sentences)
-          {
-              sentences.Enqueue(sentence);
-          }*/
+   
         NextDialogue(dialogue.names, names);
         NextDialogue(dialogue.sentences, sentences);
         DisplayNextSentence();
