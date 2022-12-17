@@ -11,13 +11,12 @@ public class GameEvents : MonoBehaviour
         current = this;                
     }
 
-    public event Action onDialogEventTrigger;
-    public void DialogEventTrigger()
+    public event Action<int> onDialogEventTrigger;
+    public void DialogEventTrigger(int id)
     {
-
         if (onDialogEventTrigger != null)
         {
-            onDialogEventTrigger();
+            onDialogEventTrigger(id);
             Debug.Log("1");
         }
     }

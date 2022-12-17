@@ -5,6 +5,8 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour
 {
     public Dialogue dialogue;
+
+    public int Id;
     public void TriggerDialogue()
     {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
@@ -13,8 +15,11 @@ public class DialogueTrigger : MonoBehaviour
     {
         GameEvents.current.onDialogEventTrigger += DialogEventTrigger;
     }
-    private void DialogEventTrigger()
+    private void DialogEventTrigger(int id)
     {
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        if (id == Id)
+        {
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        }
     }
 }
