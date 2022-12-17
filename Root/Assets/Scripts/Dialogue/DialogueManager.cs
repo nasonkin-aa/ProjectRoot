@@ -23,16 +23,25 @@ public class DialogueManager : MonoBehaviour
         dialogbox.SetActive(true);
         sentences.Clear();
         names.Clear();
-        foreach (string name in dialogue.names)
-        {
-            names.Enqueue(name);
-        }
+        /*  foreach (string name in dialogue.names)
+          {
+              names.Enqueue(name);
+          }
 
-        foreach (string sentence in dialogue.sentences)
-        {
-            sentences.Enqueue(sentence);
-        }
+          foreach (string sentence in dialogue.sentences)
+          {
+              sentences.Enqueue(sentence);
+          }*/
+        NextDialogue(dialogue.names, names);
+        NextDialogue(dialogue.sentences, sentences);
         DisplayNextSentence();
+    }
+    void NextDialogue(string[] Dialogue, Queue<string> SentencesOrName)
+    {
+        foreach (string i in Dialogue)
+        {
+            SentencesOrName.Enqueue(i);
+        }
     }
 
     public void DisplayNextSentence()
@@ -47,7 +56,17 @@ public class DialogueManager : MonoBehaviour
         string sentence = sentences.Dequeue();
         nameText.text = name;
         dialogueText.text = sentence;
-        
+        StopCoroutine(TypeSentece(sentence));
+        StartCoroutine(TypeSentece(sentence));
+    }
+    IEnumerator TypeSentece(string sentence)
+    {
+        dialogueText.text = "";
+        foreach (char letter in sentence.ToCharArray())
+        {
+            dialogueText.text += letter;
+            yield return null;
+        }
     }
     void EndDialogue()
     {
