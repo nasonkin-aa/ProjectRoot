@@ -9,4 +9,12 @@ public class DialogueTrigger : MonoBehaviour
     {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
     }
+    private void Start()
+    {
+        GameEvents.current.onDialogEventTrigger += DialogEventTrigger;
+    }
+    private void DialogEventTrigger()
+    {
+        FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+    }
 }

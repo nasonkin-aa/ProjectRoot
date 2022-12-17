@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
     {
         sentences = new Queue<string>();
         names = new Queue<string>();
+        GameEvents.current.DialogEventTrigger();
     }
 
     public void StartDialogue(Dialogue dialogue)
@@ -64,6 +65,7 @@ public class DialogueManager : MonoBehaviour
     {
         dialogbox.SetActive(false);
     }
+    
 
 
 }
