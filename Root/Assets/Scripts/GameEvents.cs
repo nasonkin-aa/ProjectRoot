@@ -17,7 +17,6 @@ public class GameEvents : MonoBehaviour
         if (onDialogEventTrigger != null)
         {
             onDialogEventTrigger(id);
-            Debug.Log("1");
         }
     }
 }
