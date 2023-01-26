@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class RoomDirection : MonoBehaviour
 {
+    public List<GameObject> Scene; 
     public DirectionController DirectionController;
 
     public CardinalDirections direction;
     public enum CardinalDirections
     {
-       
         one = 1,
         two = 2,
         thri = 3,
@@ -23,11 +23,11 @@ public class RoomDirection : MonoBehaviour
     {
         if ((int)direction == DirectionController.CurentDirection)
         {
-            FindAllChildren(true);
+            //FindAllChildren(true);
         }
         else if ((int)direction != DirectionController.CurentDirection)
         {
-            FindAllChildren(false);
+            //FindAllChildren(false);
         }
     }
     public void FindAllChildren(bool value)
