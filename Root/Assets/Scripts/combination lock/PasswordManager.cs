@@ -12,7 +12,10 @@ public class PasswordManager : MonoBehaviour
     private void Start()
     {
         _numbersInPassword.AddRange(GameObject.FindObjectsOfType<NumbersForUnLock>());
-        _numbersInPassword.OrderBy(x => x.name).ToList();
+        _numbersInPassword = _numbersInPassword.OrderBy(x => x.name).ToList();
+
+      
+        
     }
     protected void ChecedPasswored()
     {

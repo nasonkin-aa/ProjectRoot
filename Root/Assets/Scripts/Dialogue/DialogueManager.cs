@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
     {
         sentences = new Queue<string>();
         names = new Queue<string>();
+        //!!!!!!!!!!!!!!!!!!
         GameEvents.current.DialogEventTrigger(2);
     }
 
