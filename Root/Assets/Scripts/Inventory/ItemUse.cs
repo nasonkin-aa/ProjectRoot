@@ -35,11 +35,13 @@ public class ItemUse : MonoBehaviour, IInteractable
         switch (item.UnlockItemString)
         {
             case "key_green":
-                Debug.Log(item.UnlockItemString);
                 break;
             case "baikal_spr_items_set_1":
-                Debug.Log(item.UnlockItemString);
                 //gameObject.SetActive(false);
+                Destroy(gameObject);
+                SetActiveGameobject.SetActive(true);
+                break;
+            case "baikal_spr_items_set_0":
                 Destroy(gameObject);
                 SetActiveGameobject.SetActive(true);
                 break;
