@@ -26,7 +26,7 @@ public class Inventory : MonoBehaviour
             slot.transform.GetChild(0).GetComponent<Image>().sprite =
                 Resources.Load<Sprite>("Inventory Items/empty_item");
             slot.GetComponent<Slot>().ItemProperty = Slot.property.empty;
-            slot.GetComponent<Slot>().AssignProperty(-1, "empty_item", "");
+            slot.GetComponent<Slot>().AssignProperty(-1, "");
         }
         currentSelectedSlot = GameObject.Find("slot");
         previousSelectedSlot = currentSelectedSlot;

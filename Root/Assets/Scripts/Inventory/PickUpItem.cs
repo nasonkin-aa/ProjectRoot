@@ -3,14 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Visitor;
 
 public class PickUpItem : MonoBehaviour, IInteractable
 {
-
-    public string DisplaySprite;
     public enum property { usable, displayable };
-
-    public string DisplayImage;
 
     public string CombinationItem;
 
@@ -22,7 +19,6 @@ public class PickUpItem : MonoBehaviour, IInteractable
     {
         ItemPickUp();
     }
-
     public void ItemPickUp()
     {
         InventorySlots = GameObject.Find("Slots");
@@ -32,8 +28,8 @@ public class PickUpItem : MonoBehaviour, IInteractable
             if (slot.transform.GetChild(0).GetComponent<Image>().sprite.name == "empty_item")
             {
                 slot.transform.GetChild(0).GetComponent<Image>().sprite =
-                    Resources.Load<Sprite>("Inventory Items/" + DisplaySprite);
-                slot.GetComponent<Slot>().AssignProperty((int)itemProperty, DisplayImage, CombinationItem);
+                    gameObject.GetComponent<SpriteRenderer>().sprite;
+                slot.GetComponent<Slot>().AssignProperty((int)itemProperty, CombinationItem);
                 Destroy(gameObject);
                 break;
             }

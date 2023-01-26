@@ -33,10 +33,9 @@ public class Slot : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void AssignProperty(int orderNumber, string displayImage, string combinationItem)
+    public void AssignProperty(int orderNumber, string combinationItem)
     {
         ItemProperty = (property)orderNumber;
-        this.displayImage = displayImage;
         this.combinationItem = combinationItem;
     }
 
