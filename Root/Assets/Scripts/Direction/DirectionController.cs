@@ -18,5 +18,5 @@ public class DirectionController : MonoBehaviour
         }
     }
 
-    private int _curentDirectiont = 1;
+    private int _curentDirectiont = 2;
 }

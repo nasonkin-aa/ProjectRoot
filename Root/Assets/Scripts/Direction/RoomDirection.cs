@@ -9,10 +9,11 @@ public class RoomDirection : MonoBehaviour
     public CardinalDirections direction;
     public enum CardinalDirections
     {
-        north = 1,
-        east = 2,
-        south = 3,
-        west = 4
+       
+        one = 1,
+        two = 2,
+        thri = 3,
+        four = 4
     }
     public void Start()
     {
