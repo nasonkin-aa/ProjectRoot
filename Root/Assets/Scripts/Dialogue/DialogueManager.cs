@@ -36,13 +36,13 @@ public class DialogueManager : MonoBehaviour
     {
         sentences = new Queue<string>();
         names = new Queue<string>();
-        buttons = FindObjectsOfType<Button>();
         //!!!!!!!!!!!!!!!!!!
         GameEvents.current.DialogEventTrigger(0);
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
+        buttons = FindObjectsOfType<Button>();
         DisableAllButtons();
         InteractItem.SetActive(false);
         dialogbox.SetActive(true);
