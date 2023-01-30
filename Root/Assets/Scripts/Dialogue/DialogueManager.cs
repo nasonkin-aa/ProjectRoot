@@ -12,17 +12,39 @@ public class DialogueManager : MonoBehaviour
     public GameObject dialogbox;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
-    public static bool isActiveSentences;
+    public static bool IsActiveSentences = false;
+    public GameObject InteractItem;
+    public Button[] buttons;
+
+    void EnableAllButtons()
+    {
+        foreach (Button button in buttons)
+        {
+            button.gameObject.SetActive(true);
+        }
+    }
+    void DisableAllButtons()
+    {
+        foreach (Button button in buttons)
+        {
+            if (button.name == "NextButton")
+                continue;
+            button.gameObject.SetActive(false);
+        }
+    }
     void Start()
     {
         sentences = new Queue<string>();
         names = new Queue<string>();
+        buttons = FindObjectsOfType<Button>();
         //!!!!!!!!!!!!!!!!!!
         GameEvents.current.DialogEventTrigger(0);
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
+        DisableAllButtons();
+        InteractItem.SetActive(false);
         dialogbox.SetActive(true);
         sentences.Clear();
         names.Clear();
@@ -33,19 +55,18 @@ public class DialogueManager : MonoBehaviour
     }
     void NextDialogue(string[] Dialogue, Queue<string> SentencesOrName)
     {
-            foreach (string i in Dialogue)
-            {
-                SentencesOrName.Enqueue(i);
-            }
-        
+        foreach (string i in Dialogue)
+        {
+            SentencesOrName.Enqueue(i);
+        }
     }
 
     public void DisplayNextSentence()
     {
-        isActiveSentences = false;
+        IsActiveSentences = false;
         if (sentences.Count == 0)
         {
-            isActiveSentences = true;
+            IsActiveSentences = true;
             EndDialogue();
             return;
         }
@@ -69,6 +90,8 @@ public class DialogueManager : MonoBehaviour
     }
     void EndDialogue()
     {
+        InteractItem.SetActive(true);
+        EnableAllButtons();
         dialogbox.SetActive(false);
     }
     
