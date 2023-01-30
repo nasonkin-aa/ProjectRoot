@@ -40,6 +40,8 @@ public class ItemUse : MonoBehaviour, IInteractable
                 //gameObject.SetActive(false);
                 Destroy(gameObject);
                 SetActiveGameobject.SetActive(true);
+              
+                GameEvents.current.DialogEventTrigger(1);
                 break;
             case "baikal_spr_items_set_0":
                 Destroy(gameObject);

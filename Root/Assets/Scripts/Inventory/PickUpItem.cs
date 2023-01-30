@@ -24,6 +24,10 @@ public class PickUpItem : MonoBehaviour, IInteractable
 
         foreach (Transform slot in InventorySlots.transform)
         {
+            if(slot.gameObject.name == "fire")
+            {
+                Debug.Log("fire");
+            }
             if (slot.transform.GetChild(0).GetComponent<Image>().sprite.name == "empty_item")
             {
                 slot.transform.GetChild(0).GetComponent<Image>().sprite =

@@ -12,13 +12,13 @@ public class DialogueManager : MonoBehaviour
     public GameObject dialogbox;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
-
+    public static bool isActiveSentences;
     void Start()
     {
         sentences = new Queue<string>();
         names = new Queue<string>();
         //!!!!!!!!!!!!!!!!!!
-        GameEvents.current.DialogEventTrigger(2);
+        GameEvents.current.DialogEventTrigger(0);
     }
 
     public void StartDialogue(Dialogue dialogue)
@@ -33,16 +33,19 @@ public class DialogueManager : MonoBehaviour
     }
     void NextDialogue(string[] Dialogue, Queue<string> SentencesOrName)
     {
-        foreach (string i in Dialogue)
-        {
-            SentencesOrName.Enqueue(i);
-        }
+            foreach (string i in Dialogue)
+            {
+                SentencesOrName.Enqueue(i);
+            }
+        
     }
 
     public void DisplayNextSentence()
     {
+        isActiveSentences = false;
         if (sentences.Count == 0)
         {
+            isActiveSentences = true;
             EndDialogue();
             return;
         }
@@ -51,7 +54,8 @@ public class DialogueManager : MonoBehaviour
         string sentence = sentences.Dequeue();
         nameText.text = name;
         dialogueText.text = sentence;
-        StopCoroutine(TypeSentece(sentence));
+        StopAllCoroutines();
+       //остановка вех карутин
         StartCoroutine(TypeSentece(sentence));
     }
     IEnumerator TypeSentece(string sentence)

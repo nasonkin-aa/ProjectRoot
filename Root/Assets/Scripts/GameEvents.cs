@@ -6,6 +6,7 @@ using System;
 public class GameEvents : MonoBehaviour
 {
     public static GameEvents current;
+    public GameObject Chest;
     private void Awake()
     {
         current = this;                
@@ -18,6 +19,11 @@ public class GameEvents : MonoBehaviour
         {
             onDialogEventTrigger(id);
            
+        }
+        if (id == 2)
+        {
+            Debug.Log("id2");
+            Chest.SetActive(true);
         }
     }
 }

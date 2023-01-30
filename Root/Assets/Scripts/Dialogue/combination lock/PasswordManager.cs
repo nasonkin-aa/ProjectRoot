@@ -5,17 +5,14 @@ using UnityEngine;
 
 public class PasswordManager : MonoBehaviour
 {
-    
+    public GameObject KeyCode;
     public List<NumbersForUnLock> _numbersInPassword = new List<NumbersForUnLock>();
-    private string _password = "1234";
+    private string _password = "4213";
 
     private void Start()
     {
         _numbersInPassword.AddRange(GameObject.FindObjectsOfType<NumbersForUnLock>());
         _numbersInPassword = _numbersInPassword.OrderBy(x => x.name).ToList();
-
-      
-        
     }
     protected void ChecedPasswored()
     {
@@ -29,7 +26,10 @@ public class PasswordManager : MonoBehaviour
         
         if (current == _password)
         {
-            Debug.Log("unlock");
+            KeyCode = GameObject.Find("KeyCode");
+            GameEvents.current.DialogEventTrigger(2);
+            
+            KeyCode.SetActive(false);
         }
     }
 
