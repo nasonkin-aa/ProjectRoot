@@ -41,6 +41,7 @@ public class DialogueManager : MonoBehaviour
         sentences = new Queue<string>();
         names = new Queue<string>();
         //!!!!!!!!!!!!!!!!!!
+        GameObject.Find("Fade").GetComponent<FadeOut>().OutFade();
         GameEvents.current.DialogEventTrigger(0);
     }
 
