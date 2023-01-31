@@ -15,19 +15,20 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     public static bool IsActiveSentences = false;
     public GameObject InteractItem;
-    public Button[] buttons;
+    public static Button[] buttons;
     public string textSkip;
     public bool IsEnd = false;
     
-    void EnableAllButtons()
+    public static void EnableAllButtons()
     {
         foreach (Button button in buttons)
         {
             button.gameObject.SetActive(true);
         }
     }
-    void DisableAllButtons()
+    public static void DisableAllButtons()
     {
+        buttons = FindObjectsOfType<Button>();
         foreach (Button button in buttons)
         {
             if (button.name == "NextButton")
@@ -46,7 +47,6 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(Dialogue dialogue, bool endCheck)
     {
         IsEnd = endCheck;
-        buttons = FindObjectsOfType<Button>();
         DisableAllButtons();
         InteractItem.SetActive(false);
         dialogbox.SetActive(true);
