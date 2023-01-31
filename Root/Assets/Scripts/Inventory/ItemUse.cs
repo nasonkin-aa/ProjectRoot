@@ -36,14 +36,11 @@ public class ItemUse : MonoBehaviour, IInteractable
         {
             case "key_green":
                 break;
-            case "baikal_spr_items_set_1":
-                //gameObject.SetActive(false);
-                Destroy(gameObject);
-                SetActiveGameobject.SetActive(true);
-              
-                GameEvents.current.DialogEventTrigger(1);
+            case "baikal_spr_items_set_1": // Спички 
+                GetComponent<FadeIn>().Fade();
+                Invoke("EventTrigger", 1.1f);
                 break;
-            case "baikal_spr_items_set_0":
+            case "baikal_spr_items_set_0": // Картина
                 Destroy(gameObject);
                 SetActiveGameobject.SetActive(true);
                 break;
@@ -53,5 +50,10 @@ public class ItemUse : MonoBehaviour, IInteractable
                 break;
             default: throw new Exception($"item don't use '{item}'");
         }
+    }
+
+    public void EventTrigger()
+    {
+        GameEvents.current.DialogEventTrigger(1);
     }
 }
