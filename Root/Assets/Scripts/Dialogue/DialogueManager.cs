@@ -15,6 +15,7 @@ public class DialogueManager : MonoBehaviour
     public static bool IsActiveSentences = false;
     public GameObject InteractItem;
     public Button[] buttons;
+    public string textSkip;
 
     void EnableAllButtons()
     {
@@ -63,30 +64,39 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
-        IsActiveSentences = false;
-        if (sentences.Count == 0)
+        if (!IsActiveSentences)
         {
-            IsActiveSentences = true;
-            EndDialogue();
-            return;
+            if (sentences.Count == 0)
+            {
+                EndDialogue();
+                return;
+            }
+            string name = names.Dequeue();
+            string sentence = sentences.Dequeue();
+            nameText.text = name;
+            dialogueText.text = sentence;
+            textSkip = sentence;
+            StopAllCoroutines();
+            //остановка вех карутин
+            StartCoroutine(TypeSentece(sentence));
         }
-
-        string name = names.Dequeue();
-        string sentence = sentences.Dequeue();
-        nameText.text = name;
-        dialogueText.text = sentence;
-        StopAllCoroutines();
-       //остановка вех карутин
-        StartCoroutine(TypeSentece(sentence));
+        else
+        {
+            StopAllCoroutines();
+            dialogueText.text = textSkip;
+            IsActiveSentences = false;
+        }
     }
     IEnumerator TypeSentece(string sentence)
     {
+        IsActiveSentences = true;
         dialogueText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
-            yield return  new WaitForSeconds(.05f);
+            yield return new WaitForSeconds(.05f);
         }
+        IsActiveSentences = false;
     }
     void EndDialogue()
     {
