@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
@@ -16,7 +17,8 @@ public class DialogueManager : MonoBehaviour
     public GameObject InteractItem;
     public Button[] buttons;
     public string textSkip;
-
+    public bool IsEnd = false;
+    
     void EnableAllButtons()
     {
         foreach (Button button in buttons)
@@ -41,8 +43,9 @@ public class DialogueManager : MonoBehaviour
         GameEvents.current.DialogEventTrigger(0);
     }
 
-    public void StartDialogue(Dialogue dialogue)
+    public void StartDialogue(Dialogue dialogue, bool endCheck)
     {
+        IsEnd = endCheck;
         buttons = FindObjectsOfType<Button>();
         DisableAllButtons();
         InteractItem.SetActive(false);
@@ -103,8 +106,9 @@ public class DialogueManager : MonoBehaviour
         InteractItem.SetActive(true);
         EnableAllButtons();
         dialogbox.SetActive(false);
+        if (IsEnd)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
-    
-
-
 }

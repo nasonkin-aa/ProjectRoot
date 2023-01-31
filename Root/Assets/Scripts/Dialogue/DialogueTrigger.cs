@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class DialogueTrigger : MonoBehaviour
 {
     public Dialogue dialogue;
+    public bool IsEnd;
 
     public int Id;
     public void TriggerDialogue()
     {
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        FindObjectOfType<DialogueManager>().StartDialogue(dialogue, IsEnd);
     }
     private void Start()
     {
@@ -19,7 +19,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (id == Id)
         {
-            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogue, IsEnd);
         }
     }
 }
