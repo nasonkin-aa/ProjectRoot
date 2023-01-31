@@ -7,8 +7,7 @@ public class FadeOut : MonoBehaviour {
     private float _fadeDuration = 0.5f;
     private void Awake()
     {
-        _image = GameObject.Find("Fade").GetComponent<Image>();
-        //_image = GetComponent<Image>();
+        _image = gameObject.GetComponent<Image>();
     }
      
     private IEnumerator FadeAlpha(float from, float to, float duration) {

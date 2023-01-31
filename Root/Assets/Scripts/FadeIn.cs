@@ -29,7 +29,9 @@ public class FadeIn : MonoBehaviour {
         if (!nextScene.activeSelf)
         {
             nextScene.SetActive(true);
+            DialogueManager.EnableAllButtons();
             _image.gameObject.GetComponent<FadeOut>().OutFade();
+            DialogueManager.DisableAllButtons();
             thisScene.SetActive(false);
         }
     }
