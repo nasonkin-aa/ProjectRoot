@@ -10,7 +10,8 @@ public class AllItemsInCar : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI ItemBox;
-
+    public GameObject button;
+    public GameObject lopata;
     void Start()
     {
         //ItemBox.text = "";
@@ -33,6 +34,13 @@ public class AllItemsInCar : MonoBehaviour
         foreach (var item in _AllItems)
         {
             ItemBox.text += $"{item.name.ToString()}\n";
+        }
+        if(_AllItems.Count == 0)
+        {
+            GetComponent<FadeIn>().Fade();
+            GameEvents.current.DialogEventTrigger(1);
+            button.SetActive(false);
+            lopata.SetActive(true);
         }
     }
     void Update()

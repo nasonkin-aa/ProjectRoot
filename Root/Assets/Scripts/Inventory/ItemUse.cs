@@ -47,6 +47,10 @@ public class ItemUse : MonoBehaviour, IInteractable
                 Destroy(gameObject);
                 SetActiveGameobject.SetActive(true);
                 break;
+            case "Лопата целая_0":
+                GetComponent<FadeIn>().Fade();
+                GameEvents.current.DialogEventTrigger(4);
+                break;
             default: throw new Exception($"item don't use '{item}'");
         }
     }
